@@ -1,18 +1,14 @@
-import bodyParser from "body-parser";
-import express,  { Request, Response } from "express";
-import { BASE_USER_PORT,REGISTRY_PORT,  BASE_ONION_ROUTER_PORT} from "../config";
-import {Node} from "@/src/registry/registry";
-import {createRandomSymmetricKey, exportSymKey, importSymKey, rsaEncrypt, symEncrypt} from "../crypto";
 
+import bodyParser from "body-parser";
+import express from "express";
+import { BASE_USER_PORT,REGISTRY_PORT,  BASE_ONION_ROUTER_PORT} from "../config";
+import { Node } from "../registry/registry";
+import { rsaEncrypt, createRandomSymmetricKey, exportSymKey, symEncrypt } from "../crypto";
 
 export type SendMessageBody = {
   message: string;
   destinationUserId: number;
 };
-
-let lastCircuit: Node[] = [];
-let lastReceivedMessage: string | null = null;
-let lastSentMessage: string | null = null;
 
 export async function user(userId: number) {
   const _user = express();

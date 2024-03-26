@@ -36,7 +36,7 @@ export async function generateRsaKeyPair(): Promise<GenerateRsaKeyPair> {
     true,
     ["encrypt", "decrypt"]
   );
-  return { publicKey: {} as any, privateKey: {} as any };
+  return { publicKey, privateKey };
 }
 
 // Export a crypto public key to a base64 string format
@@ -114,6 +114,7 @@ export async function rsaDecrypt(
 // ######################
 
 // Generates a random symmetric key
+
 export async function createRandomSymmetricKey(): Promise<webcrypto.CryptoKey> {
   const key = await webcrypto.subtle.generateKey(
     {
@@ -146,6 +147,7 @@ export async function importSymKey(
     ["encrypt", "decrypt"]
   );
 }
+
 
 // Encrypt a message using a symmetric key
 export async function symEncrypt(
